@@ -30,7 +30,7 @@ async function loadDashboard() {
         <strong style="margin-left: var(--space-2);">${escapeHtml(item.name)}</strong>
         <p class="item-meta mt-0">${escapeHtml(item.location)} · ${formatDate(item.date_lost_found)}</p>
       </div>
-      <a class="btn btn-outline btn-sm" href="item.html?id=${item.id}">View</a>
+      <a class="btn btn-outline btn-sm" href="item.html?id=${item.id}">${icon('eye', 16)}View</a>
     </div>
   `).join('');
 }

@@ -3,9 +3,9 @@ function currentPageKey() {
   return file.replace('.html', '') || 'index';
 }
 
-function navLink(href, label, activeKey, pageKey, badge = '') {
+function navButton(href, iconName, label, activeKey, pageKey, badge = '') {
   const isActive = activeKey === pageKey;
-  return `<a href="${href}"${isActive ? ' class="active" aria-current="page"' : ''}>${escapeHtml(label)}${badge}</a>`;
+  return `<a class="nav-btn${isActive ? ' active' : ''}" href="${href}"${isActive ? ' aria-current="page"' : ''}>${icon(iconName)}<span>${escapeHtml(label)}</span>${badge}</a>`;
 }
 
 async function renderLayout() {
@@ -34,33 +34,32 @@ async function renderLayout() {
 
   const links = [];
   if (session.authenticated) {
-    links.push(navLink(`${base}dashboard.html`, 'Dashboard', pageKey, 'dashboard'));
-    links.push(navLink(`${base}browse.html`, 'Browse', pageKey, 'browse'));
-    links.push(navLink(`${base}messages.html`, 'Messages', pageKey, 'messages'));
-    links.push(navLink(`${base}notifications.html`, 'Notifications', pageKey, 'notifications', unread ? `<span class="count">${unread}</span>` : ''));
-    links.push(navLink(`${base}profile.html`, 'Profile', pageKey, 'profile'));
+    links.push(navButton(`${base}dashboard.html`, 'home', 'Dashboard', pageKey, 'dashboard'));
+    links.push(navButton(`${base}browse.html`, 'search', 'Browse', pageKey, 'browse'));
+    links.push(navButton(`${base}messages.html`, 'chat', 'Messages', pageKey, 'messages'));
+    links.push(navButton(`${base}notifications.html`, 'bell', 'Alerts', pageKey, 'notifications', unread ? `<span class="count">${unread}</span>` : ''));
+    links.push(navButton(`${base}profile.html`, 'user', 'Profile', pageKey, 'profile'));
     if (session.user.role === 'ADMIN' || session.user.role === 'MODERATOR') {
-      links.push(navLink(`${base}admin/dashboard.html`, 'Admin', pageKey, 'admin-dashboard'));
+      links.push(navButton(`${base}admin/dashboard.html`, 'shield', 'Admin', pageKey, 'admin-dashboard'));
     }
-    links.push(`<a href="#" id="logout-link">Sign out</a>`);
+    links.push(`<button type="button" class="nav-btn" id="logout-link">${icon('logout')}<span>Sign out</span></button>`);
   } else {
-    links.push(navLink(`${base}browse.html`, 'Browse', pageKey, 'browse'));
-    links.push(navLink(`${base}about.html`, 'About', pageKey, 'about'));
-    links.push(navLink(`${base}login.html`, 'Sign in', pageKey, 'login'));
-    links.push(navLink(`${base}register.html`, 'Create account', pageKey, 'register'));
+    links.push(navButton(`${base}browse.html`, 'search', 'Browse', pageKey, 'browse'));
+    links.push(navButton(`${base}about.html`, 'info', 'About', pageKey, 'about'));
+    links.push(navButton(`${base}login.html`, 'user', 'Sign in', pageKey, 'login'));
+    links.push(navButton(`${base}register.html`, 'plus', 'Create account', pageKey, 'register'));
   }
 
   host.innerHTML = `
     <div class="bar">
-      <a class="brand" href="${base}index.html">Campus Lost &amp; Found</a>
+      <a class="brand-btn" href="${base}index.html">${icon('home')}<span>Campus Lost &amp; Found</span></a>
       <nav>${links.join('')}</nav>
     </div>
   `;
 
-  const logoutLink = document.getElementById('logout-link');
-  if (logoutLink) {
-    logoutLink.addEventListener('click', async (event) => {
-      event.preventDefault();
+  const logoutButton = document.getElementById('logout-link');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', async () => {
       try {
         await apiRequest('/auth/logout', { method: 'POST' });
       } finally {

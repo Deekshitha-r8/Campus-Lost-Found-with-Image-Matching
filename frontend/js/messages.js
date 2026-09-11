@@ -39,7 +39,7 @@ async function loadMessages() {
         <div class="field mt-0">
           <textarea class="textarea" placeholder="Reply…" required></textarea>
         </div>
-        <button class="btn btn-primary btn-sm" type="submit">Send</button>
+        <button class="btn btn-primary btn-sm" type="submit">${icon('send', 16)}Send</button>
       </form>
     </article>
   `).join('');

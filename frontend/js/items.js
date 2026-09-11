@@ -24,7 +24,7 @@ async function loadItems() {
         <div>${typeBadge(item.type)} ${item.category ? `<span class="muted">${escapeHtml(item.category)}</span>` : ''}</div>
         <h3>${escapeHtml(item.name)}</h3>
         <p class="item-meta">${escapeHtml(item.location)} · ${formatDate(item.date_lost_found)}</p>
-        <a href="item.html?id=${item.id}" class="btn btn-outline btn-sm">View details</a>
+        <a href="item.html?id=${item.id}" class="btn btn-outline btn-sm">${icon('eye', 16)}View details</a>
       </article>
     `;
   }).join('');

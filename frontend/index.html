@@ -6,7 +6,7 @@
   <title>Campus Lost &amp; Found</title>
   <link rel="stylesheet" href="css/app.css">
   <style>
-    .hero { padding: var(--space-6) 0 var(--space-7); border-bottom: 1px solid var(--border); margin-bottom: var(--space-6); }
+    .hero { padding: var(--space-6) 0 var(--space-7); margin-bottom: var(--space-6); }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); }
     .feature-grid .card { margin-bottom: 0; }
   </style>
@@ -19,28 +19,32 @@
       <h1>Find what matters. Return what belongs.</h1>
       <p class="lead">A lost-and-found board for campus, with visual similarity matching to help surface promising leads between lost and found reports.</p>
       <div class="row mt-4">
-        <a class="btn btn-primary" href="login.html">Sign in</a>
-        <a class="btn btn-outline" href="register.html">Create account</a>
-        <a class="btn btn-outline" href="browse.html">Browse reports</a>
+        <a class="btn btn-primary" href="login.html"><span data-icon="user"></span>Sign in</a>
+        <a class="btn btn-outline" href="register.html"><span data-icon="plus"></span>Create account</a>
+        <a class="btn btn-outline" href="browse.html"><span data-icon="search"></span>Browse reports</a>
       </div>
       <p id="api-status" class="muted mt-4" style="font-size: 0.85rem;">Checking API status…</p>
     </section>
 
     <section class="feature-grid">
       <div class="card">
-        <h3>Search</h3>
+        <span class="btn btn-icon btn-outline" style="pointer-events: none;" data-icon="search"></span>
+        <h3 class="mt-4">Search</h3>
         <p class="item-meta">Find lost or found items by name, category, or campus location.</p>
       </div>
       <div class="card">
-        <h3>Visual matching</h3>
+        <span class="btn btn-icon btn-outline" style="pointer-events: none;" data-icon="photo"></span>
+        <h3 class="mt-4">Visual matching</h3>
         <p class="item-meta">Reports of the opposite type in the same category and location are compared by image similarity to surface likely matches. It's a lead, not proof of ownership.</p>
       </div>
       <div class="card">
-        <h3>Direct messaging</h3>
+        <span class="btn btn-icon btn-outline" style="pointer-events: none;" data-icon="chat"></span>
+        <h3 class="mt-4">Direct messaging</h3>
         <p class="item-meta">Message another user inside the platform to coordinate a return.</p>
       </div>
       <div class="card">
-        <h3>Notifications</h3>
+        <span class="btn btn-icon btn-outline" style="pointer-events: none;" data-icon="bell"></span>
+        <h3 class="mt-4">Notifications</h3>
         <p class="item-meta">Get notified when a potential match is found for one of your reports.</p>
       </div>
     </section>

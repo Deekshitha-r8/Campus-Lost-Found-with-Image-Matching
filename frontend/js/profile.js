@@ -4,7 +4,7 @@ async function loadProfile() {
   const user = data.user;
 
   container.innerHTML = `
-    <div class="row-between" style="border-bottom: 1px solid var(--border); padding-bottom: var(--space-4); margin-bottom: var(--space-4);">
+    <div class="row-between mt-0" style="padding-bottom: var(--space-4); margin-bottom: var(--space-4);">
       <div>
         <h1 class="mt-0">${escapeHtml(user.name)}</h1>
         <span class="badge badge-neutral">${escapeHtml(user.role)}</span>
@@ -18,7 +18,7 @@ async function loadProfile() {
     <div class="field"><span class="label">Account status</span><p>${user.is_verified ? 'Verified' : 'Pending verification'}</p></div>
     <div class="field"><span class="label">Member since</span><p>${formatDate(user.created_at)}</p></div>
 
-    <a class="btn btn-outline" href="settings.html">Edit profile &amp; settings</a>
+    <a class="btn btn-outline" href="settings.html">${icon('gear')}Edit profile &amp; settings</a>
   `;
 }
 

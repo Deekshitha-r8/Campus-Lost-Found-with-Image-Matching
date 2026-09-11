@@ -21,7 +21,7 @@ async function loadReports() {
       ${report.description ? `<p>${escapeHtml(report.description)}</p>` : ''}
       <p class="item-meta">Flagged by user #${report.reporter_id} · ${formatDateTime(report.created_at)}</p>
       <div class="row mt-4">
-        <a class="btn btn-outline btn-sm" href="../item.html?id=${report.item_id}">View item</a>
+        <a class="btn btn-outline btn-sm" href="../item.html?id=${report.item_id}">${icon('eye', 16)}View item</a>
         <select class="select" style="width: auto;" data-id="${report.id}">
           ${['PENDING', 'REVIEWED', 'DISMISSED', 'ACTIONED'].map((status) => `<option value="${status}" ${status === report.status ? 'selected' : ''}>${status}</option>`).join('')}
         </select>

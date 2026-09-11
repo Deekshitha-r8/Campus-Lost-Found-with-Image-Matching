@@ -9,7 +9,7 @@
 <body>
   <header id="site-header"></header>
   <main>
-    <a href="dashboard.html" class="btn btn-outline btn-sm">Back to dashboard</a>
+    <a href="dashboard.html" class="btn btn-outline btn-sm"><span data-icon="back"></span>Back to dashboard</a>
 
     <div class="card mt-4" style="max-width: 640px;">
       <h1>Report <span id="report-type-label"></span> item</h1>
@@ -66,6 +66,7 @@
         <div class="field">
           <label for="images">Photos</label>
           <label class="file-drop" for="images">
+            <span data-icon="photo" data-icon-size="28"></span>
             <div>Click to choose one or more photos</div>
             <p class="hint">JPG, PNG, or WebP, up to 5 MB each</p>
             <div class="file-names" id="file-names"></div>
@@ -73,7 +74,7 @@
           <input type="file" id="images" name="images" accept="image/jpeg,image/png,image/webp" multiple required class="hidden">
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Submit report</button>
+        <button type="submit" class="btn btn-primary btn-block"><span data-icon="send"></span>Submit report</button>
         <div id="form-message" role="alert" aria-live="polite" class="mt-4"></div>
       </form>
     </div>

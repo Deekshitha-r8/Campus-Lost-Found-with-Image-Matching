@@ -3,10 +3,10 @@ const viewedItemId = Number(new URLSearchParams(location.search).get('id')) || n
 function renderMatchCard(match, other) {
   const thumb = other.images[0] ? `<img class="item-thumb" src="${imageUrl(other.images[0].image_path)}" alt="Photo of ${escapeHtml(other.name)}" style="max-width: 140px;">` : '';
   const actions = match.status === 'PENDING'
-    ? `<button class="btn btn-primary btn-sm" data-action="accept" data-id="${match.id}">Accept</button>
-       <button class="btn btn-outline btn-sm" data-action="reject" data-id="${match.id}">Reject</button>`
+    ? `<button class="btn btn-primary btn-sm" data-action="accept" data-id="${match.id}">${icon('check', 16)}Accept</button>
+       <button class="btn btn-outline btn-sm" data-action="reject" data-id="${match.id}">${icon('close', 16)}Reject</button>`
     : match.status === 'ACCEPTED'
-      ? `<button class="btn btn-outline btn-sm" data-action="returned" data-id="${match.id}">Mark as returned</button>`
+      ? `<button class="btn btn-outline btn-sm" data-action="returned" data-id="${match.id}">${icon('undo', 16)}Mark as returned</button>`
       : '';
   return `
     <article class="card row">
@@ -16,7 +16,7 @@ function renderMatchCard(match, other) {
         <h3>${escapeHtml(other.name)}</h3>
         <p class="item-meta">${escapeHtml(other.location)} · ${formatDate(other.date_lost_found)}</p>
         <p class="item-meta">Match score: ${Math.round(match.final_score)}%</p>
-        <a class="btn btn-outline btn-sm" href="item.html?id=${other.id}">View item</a>
+        <a class="btn btn-outline btn-sm" href="item.html?id=${other.id}">${icon('eye', 16)}View item</a>
         <div class="row mt-4">${actions}</div>
       </div>
     </article>

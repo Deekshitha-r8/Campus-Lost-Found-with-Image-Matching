@@ -8,10 +8,10 @@ async function loadNotifications() {
   }
 
   container.innerHTML = data.notifications.map((notification) => `
-    <article class="card${notification.is_read ? '' : ' badge-neutral'}" data-id="${notification.id}">
+    <article class="card" data-id="${notification.id}">
       <div class="row-between">
-        <strong>${escapeHtml(notification.title)}</strong>
-        ${notification.is_read ? '' : '<button class="btn btn-outline btn-sm" data-action="read">Mark read</button>'}
+        <strong class="row">${icon('bell', 16)}${escapeHtml(notification.title)}</strong>
+        ${notification.is_read ? '' : `<button class="btn btn-outline btn-sm" data-action="read">${icon('check', 16)}Mark read</button>`}
       </div>
       <p>${escapeHtml(notification.message)}</p>
       <p class="item-meta">${formatDateTime(notification.created_at)}</p>
