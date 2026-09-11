@@ -6,4 +6,3 @@ __pycache__/
 instance/
 backend/uploads/*
 !backend/uploads/.gitkeep
-tests/test_uploads/

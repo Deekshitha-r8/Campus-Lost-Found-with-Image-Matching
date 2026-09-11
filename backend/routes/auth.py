@@ -1,13 +1,8 @@
-import logging
-
 from flask import Blueprint, g, jsonify, request, session
 from sqlalchemy.exc import IntegrityError
 
-from backend.extensions import db
 from backend.services.auth_service import authenticate_user, register_user, update_profile
 from backend.utils.auth import login_required, load_current_user
-
-logger = logging.getLogger(__name__)
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
@@ -23,6 +18,8 @@ def register():
     try:
         user, error = register_user(data)
     except IntegrityError:
+        from backend.extensions import db
+
         db.session.rollback()
         return error_response("DUPLICATE_USER", "College email or student ID is already registered.", 409)
     if error:
@@ -38,7 +35,6 @@ def login():
         return error_response("INVALID_LOGIN", "College email and password are required.", 400)
     user = authenticate_user(data["college_email"], data["password"])
     if user is None:
-        logger.warning("Failed login attempt for %s", data["college_email"])
         return error_response("INVALID_LOGIN", "Invalid college email or password.", 401)
     session.clear()
     session["user_id"] = user.id
