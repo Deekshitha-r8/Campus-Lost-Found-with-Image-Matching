@@ -5,7 +5,8 @@ function currentPageKey() {
 
 function navButton(href, iconName, label, activeKey, pageKey, badge = '') {
   const isActive = activeKey === pageKey;
-  return `<a class="nav-btn${isActive ? ' active' : ''}" href="${href}"${isActive ? ' aria-current="page"' : ''}>${icon(iconName)}<span>${escapeHtml(label)}</span>${badge}</a>`;
+  const safeLabel = escapeHtml(label);
+  return `<a class="nav-btn${isActive ? ' active' : ''}" href="${href}" title="${safeLabel}"${isActive ? ' aria-current="page"' : ''}>${icon(iconName)}<span class="sr-only">${safeLabel}</span>${badge}</a>`;
 }
 
 async function renderLayout() {
@@ -42,7 +43,7 @@ async function renderLayout() {
     if (session.user.role === 'ADMIN' || session.user.role === 'MODERATOR') {
       links.push(navButton(`${base}admin/dashboard.html`, 'shield', 'Admin', pageKey, 'admin-dashboard'));
     }
-    links.push(`<button type="button" class="nav-btn" id="logout-link">${icon('logout')}<span>Sign out</span></button>`);
+    links.push(`<button type="button" class="nav-btn" id="logout-link" title="Sign out">${icon('logout')}<span class="sr-only">Sign out</span></button>`);
   } else {
     links.push(navButton(`${base}browse.html`, 'search', 'Browse', pageKey, 'browse'));
     links.push(navButton(`${base}about.html`, 'info', 'About', pageKey, 'about'));
